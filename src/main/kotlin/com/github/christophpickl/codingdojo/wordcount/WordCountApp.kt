@@ -17,8 +17,7 @@ object WordCountApp {
 
         val input = readText()
         val result = counter.count(input)
-        // TODO format average length to two digits??
-        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength} characters")
+        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength.format(2)} characters")
         if (indexEnabled) {
             printIndex(dictEnabled, result.index)
         }
@@ -32,3 +31,5 @@ object WordCountApp {
     }
 
 }
+
+fun Double.format(digits: Int) = java.lang.String.format("%.${digits}f", this)
