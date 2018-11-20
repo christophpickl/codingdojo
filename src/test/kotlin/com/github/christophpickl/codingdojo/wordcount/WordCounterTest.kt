@@ -7,7 +7,8 @@ import org.testng.annotations.Test
 @Test
 class WordCounterTest {
 
-    private val neverIsStopWord: StopWordsFilter = { false }
+    private val neverIsStopWord: WordFilter = { false }
+    private val neverIsDictWord: WordFilter = { false }
 
     fun `When counting empty string Then word count is 0`() {
         assertThat(counter().count("").wordCount, equalTo(0))
@@ -58,9 +59,9 @@ class WordCounterTest {
     }
 
     fun `When passing some words Then return proper index`() {
-        assertThat(counter().count("C d b a a").index, equalTo(listOf("a", "b", "C", "d")))
+        assertThat(counter().count("C d b a a").index.words.map { it.term }, equalTo(listOf("a", "b", "C", "d")))
     }
 
-    private fun counter() = WordCounter(neverIsStopWord)
+    private fun counter() = WordCounter(neverIsStopWord, neverIsDictWord)
 
 }

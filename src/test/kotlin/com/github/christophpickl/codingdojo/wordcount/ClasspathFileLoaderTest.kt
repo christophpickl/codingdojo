@@ -5,18 +5,18 @@ import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
 @Test
-class StopWordsLoaderTest {
+class ClasspathFileLoaderTest {
 
     @Test(
         expectedExceptions = [IllegalArgumentException::class],
         expectedExceptionsMessageRegExp = """.*invalid\.txt.*"""
     )
-    fun `When load non-existing file Then throw`() {
-        StopWordsLoader.load("invalid.txt")
+    fun `When readLinesOf non-existing file Then throw`() {
+        ClasspathFileLoader.readLinesOf("invalid.txt")
     }
 
-    fun `When load existing file Then return content`() {
-        assertThat(StopWordsLoader.load("/test_stopwords.txt"),
+    fun `When readLinesOf existing file Then return content`() {
+        assertThat(ClasspathFileLoader.readLinesOf("test_stopwords.txt"),
             equalTo(listOf("a", "b", "c")))
     }
 

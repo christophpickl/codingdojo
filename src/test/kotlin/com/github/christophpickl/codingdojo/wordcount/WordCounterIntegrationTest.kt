@@ -29,6 +29,6 @@ class WordCounterIntegrationTest {
         assertThat(counter().count("x xx xxx xxxx").averageLength, equalTo(2.5))
     }
 
-    private fun counter() = WordCounter(buildStopWordsFilter())
+    private fun counter() = WordCounter(buildStopWordsFilter(), buildDictFilter(arrayOf("-dictionary=dict.txt")))
 
 }

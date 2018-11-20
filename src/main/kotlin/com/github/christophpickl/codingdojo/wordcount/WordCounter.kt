@@ -2,8 +2,11 @@ package com.github.christophpickl.codingdojo.wordcount
 
 import java.util.regex.Pattern
 
+const val indexCliArg = "-index"
+
 class WordCounter(
-    private val stopWordsFilter: StopWordsFilter
+    private val stopWordsFilter: WordFilter,
+    private val dictionaryFilter: WordFilter
 ) {
 
     private val multiWhitespacePattern = Pattern.compile("\\s+")
@@ -18,7 +21,14 @@ class WordCounter(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size,
             averageLength = words.map { it.length }.average(),
-            lazyIndex = lazy { words.distinct().sortedWith(String.CASE_INSENSITIVE_ORDER) }
+            lazyIndex = lazy {
+                Index(
+                    words
+                        .distinct()
+                        .sortedWith(String.CASE_INSENSITIVE_ORDER)
+                        .map { IndexEntry(it, dictionaryFilter(it)) }
+                )
+            }
         )
     }
 
@@ -36,11 +46,26 @@ class CountResult(
     val wordCount: Int,
     val uniqueWordCount: Int,
     val averageLength: Double,
-    lazyIndex: Lazy<List<String>>
+    lazyIndex: Lazy<Index>
 ) {
-    val index: List<String> by lazyIndex
+    val index: Index by lazyIndex
 
     companion object {
-        val empty = CountResult(0, 0, 0.0, lazy { emptyList<String>() })
+        val empty = CountResult(0, 0, 0.0, lazy { Index.empty })
     }
 }
+
+class Index(
+    val words: List<IndexEntry>
+) {
+    val unknownWordsCount = words.filter { !it.knownByDictionary }.count()
+
+    companion object {
+        val empty = Index(emptyList())
+    }
+}
+
+class IndexEntry(
+    val term: String,
+    val knownByDictionary: Boolean
+)

@@ -1,5 +1,7 @@
 package com.github.christophpickl.codingdojo.wordcount
 
+typealias WordFilter = (String) -> Boolean
+
 object WordCountApp {
 
     @JvmStatic
@@ -9,14 +11,18 @@ object WordCountApp {
             invalidCliArgs(args)
             return
         }
-        val indexEnabled = args.contains("-index")
-        val counter = WordCounter(buildStopWordsFilter())
+        val indexEnabled = args.contains(indexCliArg)
+        val dictEnabled = isDictEnabled(args)
+        val counter = WordCounter(buildStopWordsFilter(), buildDictFilter(args))
+
         val input = readText()
         val result = counter.count(input)
         println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength} characters")
         if (indexEnabled) {
-            println("Index:")
-            result.index.forEach(::println)
+            println("Index${if (dictEnabled) " (unknown: ${result.index.unknownWordsCount})" else ""}:")
+            result.index.words.forEach {
+                println("${it.term}${if (dictEnabled && !it.knownByDictionary) "*" else ""}")
+            }
         }
     }
 
