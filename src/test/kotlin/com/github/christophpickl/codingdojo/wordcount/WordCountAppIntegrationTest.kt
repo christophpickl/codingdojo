@@ -30,11 +30,18 @@ class WordCountAppIntegrationTest {
         ))
     }
 
-    fun `Given app without CLI args When entering two words of different length Then print average length by 2 digits`() {
+    fun `Given app without CLI args When entering two words of different length Then print average length with 2 decimals`() {
         val printed = IoTestUtil.readAndWrite("x yy zz\n") {
             WordCountApp.main(emptyArray())
         }
         assertThat(printed, containsSubstring("average word length: 1.67 characters"))
+    }
+
+    fun `Given app without CLI args When entering one word Then print average length with 1 decimal`() {
+        val printed = IoTestUtil.readAndWrite("x\n") {
+            WordCountApp.main(emptyArray())
+        }
+        assertThat(printed, containsSubstring("average word length: 1.0 characters"))
     }
 
     fun `Given app with two CLI args Then print error`() {
@@ -93,7 +100,7 @@ class WordCountAppIntegrationTest {
         val printed = IoTestUtil.readAndWrite("some text\n\n") {
             WordCountApp.main(emptyArray())
         }
-        assertThat(printed, equalTo("Enter text: Number of words: 2, unique: 2; average word length: 4.00 characters\nEnter text: "))
+        assertThat(printed, equalTo("Enter text: Number of words: 2, unique: 2; average word length: 4.0 characters\nEnter text: "))
     }
 
 }
