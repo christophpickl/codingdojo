@@ -4,6 +4,7 @@ import com.github.christophpickl.codingdojo.IoTestUtil
 import com.natpryce.hamkrest.allOf
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
+import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
 @Test
@@ -86,6 +87,13 @@ class WordCountAppIntegrationTest {
             containsSubstring("Number of words:"),
             containsSubstring("Index").not()
         ))
+    }
+
+    fun `Given text entered When hit enter without text Then application quits`() {
+        val printed = IoTestUtil.readAndWrite("some text\n\n") {
+            WordCountApp.main(emptyArray())
+        }
+        assertThat(printed, equalTo("Enter text: Number of words: 2, unique: 2; average word length: 4.00 characters\nEnter text: "))
     }
 
 }

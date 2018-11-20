@@ -15,12 +15,17 @@ object WordCountApp {
         val dictEnabled = isDictEnabled(args)
         val counter = WordCounter(buildStopWordsFilter(), buildDictFilter(args))
 
-        val input = readText()
-        val result = counter.count(input)
-        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength.format(2)} characters")
-        if (indexEnabled) {
-            printIndex(dictEnabled, result.index)
-        }
+        do {
+            val input = readText()
+            if (input.isEmpty()) {
+                break
+            }
+            val result = counter.count(input)
+            println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength.format(2)} characters")
+            if (indexEnabled) {
+                printIndex(dictEnabled, result.index)
+            }
+        } while (true)
     }
 
     private fun invalidCliArgs(args: Array<String>) {
