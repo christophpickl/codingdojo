@@ -12,8 +12,8 @@ object WordCountApp {
 
         val counter = WordCounter(buildStopWordsFilter())
         val input = readText()
-        val wordCount = counter.count(input)
-        println("Number of words: $wordCount")
+        val (wordCount, uniqueWordCount) = counter.count(input)
+        println("Number of words: $wordCount, unique: $uniqueWordCount")
     }
 
     private fun invalidCliArgs() {
