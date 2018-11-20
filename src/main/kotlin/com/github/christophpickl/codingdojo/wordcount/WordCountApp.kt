@@ -13,8 +13,7 @@ object WordCountApp {
         val counter = WordCounter(buildStopWordsFilter())
         val input = readText()
         val result = counter.count(input)
-        // FIXME forgot to print out average from previous task!!!
-        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}")
+        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength} characters")
         if (indexEnabled) {
             println("Index:")
             result.index.forEach(::println)
