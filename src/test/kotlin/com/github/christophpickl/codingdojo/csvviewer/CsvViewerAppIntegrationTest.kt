@@ -1,6 +1,6 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
-import com.github.christophpickl.codingdojo.IoTestUtil
+import com.github.christophpickl.codingdojo.IoUtil
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
@@ -9,7 +9,7 @@ import org.testng.annotations.Test
 class CsvViewerAppIntegrationTest {
 
     fun `When passing empty cli args Then print error message`() {
-        val printed = IoTestUtil.readFrom {
+        val printed = IoUtil.readFrom {
             CsvViewerApp.main(emptyArray())
         }
         assertThat(printed, equalTo("Must define filename as application argument!\n"))
@@ -24,7 +24,7 @@ class CsvViewerAppIntegrationTest {
     }
 
     fun `When passing persons CSV Then print proper CSV table`() {
-        val printed = IoTestUtil.readFrom {
+        val printed = IoUtil.readFrom {
             CsvViewerApp.main(arrayOf("persons.csv"))
         }
         assertThat(printed, equalTo("""

@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream
 import java.io.PrintStream
 
 // https://github.com/christophpickl/kpotpourri/blob/master/common4k/src/main/kotlin/com/github/christophpickl/kpotpourri/common/io/io.kt
-object IoTestUtil {
+object IoUtil {
 
     fun readFrom(actionWhichWritesToStdOut: () -> Unit): String {
         val old = System.out

@@ -1,6 +1,6 @@
 package com.github.christophpickl.codingdojo.wordcount
 
-import com.github.christophpickl.codingdojo.IoTestUtil
+import com.github.christophpickl.codingdojo.IoUtil
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
@@ -12,7 +12,7 @@ class TextReaderTest {
 
     fun `askInteractivelyTextReader - When enter some text Then return that entered text`() {
         val someText = "foo bar"
-        IoTestUtil.writeTo(someText) {
+        IoUtil.writeTo(someText) {
             assertThat(askInteractivelyTextReader(),
                 equalTo(someText))
         }
