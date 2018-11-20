@@ -56,4 +56,12 @@ class WordCountAppIntegrationTest {
             containsSubstring("Index:")
         ))
     }
+
+    fun `Given app with index flag Then print proper index`() {
+        val printed = IoTestUtil.readAndWrite("y x z") {
+            WordCountApp.main(arrayOf("-index"))
+        }
+        assertThat(printed, containsSubstring("Index:\nx\ny\nz"))
+    }
+
 }
