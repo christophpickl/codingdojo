@@ -18,8 +18,7 @@ class WordCounter(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size,
             averageLength = words.map { it.length }.average(),
-            // TODO only calculate if index enabled
-            index = words.distinct().sortedWith(String.CASE_INSENSITIVE_ORDER)
+            lazyIndex = lazy { words.distinct().sortedWith(String.CASE_INSENSITIVE_ORDER) }
         )
     }
 
@@ -33,13 +32,15 @@ class WordCounter(
 
 }
 
-data class CountResult(
+class CountResult(
     val wordCount: Int,
     val uniqueWordCount: Int,
     val averageLength: Double,
-    val index: List<String>
+    lazyIndex: Lazy<List<String>>
 ) {
+    val index: List<String> by lazyIndex
+
     companion object {
-        val empty = CountResult(0, 0, 0.0, emptyList())
+        val empty = CountResult(0, 0, 0.0, lazy { emptyList<String>() })
     }
 }
