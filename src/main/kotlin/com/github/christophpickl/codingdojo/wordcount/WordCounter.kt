@@ -2,7 +2,6 @@ package com.github.christophpickl.codingdojo.wordcount
 
 import java.util.regex.Pattern
 
-
 class WordCounter(
     private val stopWordsFilter: StopWordsFilter
 ) {

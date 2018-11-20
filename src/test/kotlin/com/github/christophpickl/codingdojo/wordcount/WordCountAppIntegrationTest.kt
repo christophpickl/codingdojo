@@ -1,5 +1,6 @@
 package com.github.christophpickl.codingdojo.wordcount
 
+import com.github.christophpickl.codingdojo.IoTestUtil
 import com.natpryce.hamkrest.allOf
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring

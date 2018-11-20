@@ -1,4 +1,4 @@
-package com.github.christophpickl.codingdojo.wordcount
+package com.github.christophpickl.codingdojo
 
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
