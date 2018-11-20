@@ -53,7 +53,6 @@ class WordCounterTest {
         assertThat(counter().count("a-a").wordCount, equalTo(2))
     }
 
-    @Test(enabled = false) // TODO WIP
     fun `When passing two same words Then unique word count is 1`() {
         assertThat(counter().count("a a").uniqueWordCount, equalTo(1))
     }

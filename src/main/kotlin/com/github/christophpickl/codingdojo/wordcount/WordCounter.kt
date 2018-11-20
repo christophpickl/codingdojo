@@ -13,15 +13,16 @@ class WordCounter(
         if (text.isEmpty() || text.isBlank()) {
             return CountResult.empty
         }
-        val wordCount = multiWhitespacePattern.matcher(text).replaceAll(" ")
+
+        val words = multiWhitespacePattern.matcher(text).replaceAll(" ")
             .split(" ", "-")
             .map { it.removeSuffix(".") }
             .filter { wordPattern.matcher(it).matches() }
             .filterNot(stopWordsFilter)
-            .size
+
         return CountResult(
-            wordCount = wordCount,
-            uniqueWordCount = 42 // FIXME implement me
+            wordCount = words.size,
+            uniqueWordCount = words.distinct().size
         )
     }
 
