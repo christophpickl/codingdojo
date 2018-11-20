@@ -45,6 +45,14 @@ class WordCounterTest {
         assertThat(counter().count("Mary had a little lamb"), equalTo(5))
     }
 
+    fun `When passing word with trailing dot Then return recognize it as a word`() {
+        assertThat(counter().count("aaa."), equalTo(1))
+    }
+
+    fun `When passing words seperated by dash Then return split words`() {
+        assertThat(counter().count("a-b"), equalTo(2))
+    }
+
     private fun counter() = WordCounter(neverIsStopWord)
 
 }

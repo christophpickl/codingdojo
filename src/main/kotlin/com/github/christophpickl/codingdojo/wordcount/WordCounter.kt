@@ -7,14 +7,15 @@ class WordCounter(
 ) {
 
     private val multiWhitespacePattern = Pattern.compile("\\s+")
-    private val wordPattern = Pattern.compile("[a-zA-Z]+")
+    private val wordPattern = Pattern.compile("""[a-zA-Z]+""")
 
     fun count(text: String): Int {
         if (text.isEmpty() || text.isBlank()) {
             return 0
         }
         return multiWhitespacePattern.matcher(text).replaceAll(" ")
-            .split(" ")
+            .split(" ", "-")
+            .map { it.removeSuffix(".") }
             .filter { wordPattern.matcher(it).matches() }
             .filterNot(stopWordsFilter)
             .size

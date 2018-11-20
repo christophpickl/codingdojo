@@ -15,8 +15,12 @@ class WordCounterIntegrationTest {
         assertThat(counter().count("THE"), equalTo(1))
     }
 
-    fun `Given real counter When use sample sentence from requirements Then return proper word count`() {
+    fun `Given real counter When use sample sentence from requirements 3 Then return proper word count`() {
         assertThat(counter().count("Mary had a little lamb"), equalTo(4))
+    }
+
+    fun `Given real counter When use sample sentence from requirements 4 Then return proper word count`() {
+        assertThat(counter().count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."), equalTo(9))
     }
 
     private fun counter() = WordCounter(buildStopWordsFilter())
