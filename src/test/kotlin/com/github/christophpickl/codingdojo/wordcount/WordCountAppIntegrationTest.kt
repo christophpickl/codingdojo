@@ -40,4 +40,20 @@ class WordCountAppIntegrationTest {
         ))
     }
 
+    fun `Given app with optional index CLI args Then print index`() {
+        val printed = IoTestUtil.readAndWrite("anything") {
+            WordCountApp.main(arrayOf("-index"))
+        }
+        assertThat(printed, containsSubstring("Index:"))
+    }
+
+    fun `Given app with file and index flag Then print result along with index`() {
+        val printed = IoTestUtil.readFrom {
+            WordCountApp.main(arrayOf(readFromTextFilePath, "-index"))
+        }
+        assertThat(printed, allOf(
+            containsSubstring("Number of words: "),
+            containsSubstring("Index:")
+        ))
+    }
 }

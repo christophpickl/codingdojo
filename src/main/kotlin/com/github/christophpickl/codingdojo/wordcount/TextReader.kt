@@ -5,9 +5,10 @@ import java.io.File
 typealias TextReader = () -> String
 
 fun buildTextReader(args: Array<String>): TextReader? {
-    return when (args.size) {
+    val suitableArgs = args.filter { !it.startsWith("-") }
+    return when (suitableArgs.size) {
         0 -> askInteractivelyTextReader
-        1 -> fromFileTextReader(args[0])
+        1 -> fromFileTextReader(suitableArgs.first())
         else -> null
     }
 }

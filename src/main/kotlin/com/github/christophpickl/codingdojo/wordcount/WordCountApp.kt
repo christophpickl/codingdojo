@@ -9,15 +9,21 @@ object WordCountApp {
             invalidCliArgs(args)
             return
         }
-
+        val indexEnabled = args.contains("-index")
         val counter = WordCounter(buildStopWordsFilter())
         val input = readText()
-        val (wordCount, uniqueWordCount) = counter.count(input)
-        println("Number of words: $wordCount, unique: $uniqueWordCount")
+        val result = counter.count(input)
+        // FIXME forgot to print out average from previous task!!!
+        println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}")
+        if (indexEnabled) {
+            println("Index:")
+            result.index.forEach(::println)
+        }
     }
 
     private fun invalidCliArgs(args: Array<String>) {
-        System.out.println("Invalid CLI arguments! (${args.contentToString()})\nExpected either none or one argument (filepath)")
+        System.out.println("Invalid CLI arguments! (${args.contentToString()})\n" +
+            "Expected either none or one argument (filepath) along with an option '-index' argument.")
     }
 
 }

@@ -17,7 +17,9 @@ class WordCounter(
         return CountResult(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size,
-            averageLength = words.map { it.length }.average()
+            averageLength = words.map { it.length }.average(),
+            // TODO only calculate if index enabled
+            index = emptyList() // FIXME implement me
         )
     }
 
@@ -34,9 +36,10 @@ class WordCounter(
 data class CountResult(
     val wordCount: Int,
     val uniqueWordCount: Int,
-    val averageLength: Double
+    val averageLength: Double,
+    val index: List<String>
 ) {
     companion object {
-        val empty = CountResult(0, 0, 0.0)
+        val empty = CountResult(0, 0, 0.0, emptyList())
     }
 }
