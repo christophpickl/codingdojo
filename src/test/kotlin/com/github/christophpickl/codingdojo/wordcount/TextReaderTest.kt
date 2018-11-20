@@ -5,6 +5,8 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
+const val readFromTextFilePath = "src/test/resources/test_readTextFromThisFile.txt"
+
 @Test
 class TextReaderTest {
 
@@ -25,7 +27,7 @@ class TextReaderTest {
     }
 
     fun `fromFileTextReader - When read valid file as given in requirements Then return text content without linebreaks`() {
-        assertThat(fromFileTextReader("src/test/resources/test_readTextFromThisFile.txt")(),
+        assertThat(fromFileTextReader(readFromTextFilePath)(),
             equalTo("Mary had a little lamb"))
     }
 }
