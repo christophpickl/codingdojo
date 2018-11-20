@@ -32,13 +32,13 @@ class CsvTableTest {
         assertThat(CsvTable(
             headers = listOf("123"),
             rowData = listOf(listOf("1"))
-        ).maxLength, equalTo(3))
+        ).columnMaxLengths, equalTo(listOf(3)))
     }
 
     fun `maxLength - When row has max length Then return its length`() {
         assertThat(CsvTable(
             headers = listOf("1"),
             rowData = listOf(listOf("123"))
-        ).maxLength, equalTo(3))
+        ).columnMaxLengths, equalTo(listOf(3)))
     }
 }
