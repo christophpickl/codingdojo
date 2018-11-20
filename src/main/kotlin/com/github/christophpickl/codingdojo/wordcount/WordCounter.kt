@@ -8,7 +8,7 @@ class WordCounter(
 ) {
 
     private val multiWhitespacePattern = Pattern.compile("\\s+")
-    private val wordPattern = Pattern.compile("[a-zA-Z]")
+    private val wordPattern = Pattern.compile("[a-zA-Z]+")
 
     fun count(text: String): Int {
         if (text.isEmpty() || text.isBlank()) {

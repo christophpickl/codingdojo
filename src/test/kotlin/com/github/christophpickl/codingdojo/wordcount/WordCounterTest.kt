@@ -6,7 +6,7 @@ import org.testng.annotations.Test
 
 @Test
 class WordCounterTest {
-    
+
     private val neverIsStopWord: StopWordsFilter = { false }
 
     fun `When counting empty string Then return 0`() {
@@ -19,6 +19,10 @@ class WordCounterTest {
 
     fun `When counting single word Then return 1`() {
         assertThat(counter().count("a"), equalTo(1))
+    }
+
+    fun `When counting single multi lettered word Then return 1`() {
+        assertThat(counter().count("aaa"), equalTo(1))
     }
 
     fun `When counting single number Then return 0`() {

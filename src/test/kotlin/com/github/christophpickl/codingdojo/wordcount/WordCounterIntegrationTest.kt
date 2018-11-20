@@ -11,6 +11,10 @@ class WordCounterIntegrationTest {
         assertThat(counter().count("the"), equalTo(0))
     }
 
+    fun `Given real counter When count word "THE" Then return 1`() {
+        assertThat(counter().count("THE"), equalTo(1))
+    }
+
     private fun counter() = WordCounter(buildStopWordsFilter())
 
 }
