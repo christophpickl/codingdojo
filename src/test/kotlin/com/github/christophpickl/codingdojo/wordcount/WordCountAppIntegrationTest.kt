@@ -71,4 +71,21 @@ class WordCountAppIntegrationTest {
         assertThat(printed, containsSubstring("Index:\nx\ny\nz"))
     }
 
+    fun `Given app with index and dictionary flag Then print proper index with dictionary data`() {
+        val printed = IoTestUtil.readAndWrite("x big y") {
+            WordCountApp.main(arrayOf("-index", "-dictionary=dict.txt"))
+        }
+        assertThat(printed, containsSubstring("Index (unknown: 2):\nbig\nx*\ny*"))
+    }
+
+    fun `Given app with dictionary but without index flag Then dont print index at all`() {
+        val printed = IoTestUtil.readAndWrite("some text") {
+            WordCountApp.main(arrayOf("-dictionary=dict.txt"))
+        }
+        assertThat(printed, allOf(
+            containsSubstring("Number of words:"),
+            containsSubstring("Index").not()
+        ))
+    }
+
 }

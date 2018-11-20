@@ -6,7 +6,7 @@ import com.natpryce.hamkrest.sameInstance
 import org.testng.annotations.Test
 
 @Test
-class DictionaryTest {
+class IndexTest {
 
     fun `When build filter with empty array Then return disabled dict instance`() {
         assertThat(buildDictFilter(emptyArray()),
@@ -26,6 +26,16 @@ class DictionaryTest {
 
         assertThat(filter("big"), equalTo(true))
         assertThat(filter("bigg"), equalTo(false))
+    }
+
+    @Suppress("MoveLambdaOutsideParentheses")
+    fun `When build index Then return proper instance`() {
+        val actual = Index.build(listOf("B", "a"), { word: String -> word == "a" })
+        assertThat(actual.unknownWordsCount, equalTo(1))
+        assertThat(actual.words, equalTo(listOf(
+            IndexEntry("a", true),
+            IndexEntry("B", false)
+        )))
     }
 
 }

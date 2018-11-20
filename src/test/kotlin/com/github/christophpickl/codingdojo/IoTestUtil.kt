@@ -7,7 +7,6 @@ import java.io.PrintStream
 // https://github.com/christophpickl/kpotpourri/blob/master/common4k/src/main/kotlin/com/github/christophpickl/kpotpourri/common/io/io.kt
 object IoTestUtil {
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun readFrom(actionWhichWritesToStdOut: () -> Unit): String {
         val old = System.out
         val byteStream = ByteArrayOutputStream()
@@ -24,7 +23,6 @@ object IoTestUtil {
         return printed
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
     fun writeTo(text: String, actionWhichReadsFromStdIn: () -> Unit) {
         val old = System.`in`
         try {

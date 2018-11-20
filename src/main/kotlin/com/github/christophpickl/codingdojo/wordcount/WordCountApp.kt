@@ -17,18 +17,18 @@ object WordCountApp {
 
         val input = readText()
         val result = counter.count(input)
+        // TODO format average length to two digits??
         println("Number of words: ${result.wordCount}, unique: ${result.uniqueWordCount}; average word length: ${result.averageLength} characters")
         if (indexEnabled) {
-            println("Index${if (dictEnabled) " (unknown: ${result.index.unknownWordsCount})" else ""}:")
-            result.index.words.forEach {
-                println("${it.term}${if (dictEnabled && !it.knownByDictionary) "*" else ""}")
-            }
+            printIndex(dictEnabled, result.index)
         }
     }
 
     private fun invalidCliArgs(args: Array<String>) {
         System.out.println("Invalid CLI arguments! (${args.contentToString()})\n" +
-            "Expected either none or one argument (filepath) along with an option '-index' argument.")
+            "Expected either none or one argument (filepath) along with:\n" +
+            "* an option '-index' argument\n" +
+            "* additional to index an option '-dictionary=classpath.txt'")
     }
 
 }

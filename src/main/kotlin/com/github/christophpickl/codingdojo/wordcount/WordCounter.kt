@@ -2,8 +2,6 @@ package com.github.christophpickl.codingdojo.wordcount
 
 import java.util.regex.Pattern
 
-const val indexCliArg = "-index"
-
 class WordCounter(
     private val stopWordsFilter: WordFilter,
     private val dictionaryFilter: WordFilter
@@ -21,14 +19,7 @@ class WordCounter(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size,
             averageLength = words.map { it.length }.average(),
-            lazyIndex = lazy {
-                Index(
-                    words
-                        .distinct()
-                        .sortedWith(String.CASE_INSENSITIVE_ORDER)
-                        .map { IndexEntry(it, dictionaryFilter(it)) }
-                )
-            }
+            lazyIndex = lazy { Index.build(words, dictionaryFilter) }
         )
     }
 
@@ -54,18 +45,3 @@ class CountResult(
         val empty = CountResult(0, 0, 0.0, lazy { Index.empty })
     }
 }
-
-class Index(
-    val words: List<IndexEntry>
-) {
-    val unknownWordsCount = words.filter { !it.knownByDictionary }.count()
-
-    companion object {
-        val empty = Index(emptyList())
-    }
-}
-
-class IndexEntry(
-    val term: String,
-    val knownByDictionary: Boolean
-)
