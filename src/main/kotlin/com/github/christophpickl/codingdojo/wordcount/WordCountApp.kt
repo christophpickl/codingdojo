@@ -6,7 +6,7 @@ object WordCountApp {
     fun main(args: Array<String>) {
         val readText = buildTextReader(args)
         if (readText == null) {
-            invalidCliArgs()
+            invalidCliArgs(args)
             return
         }
 
@@ -16,7 +16,8 @@ object WordCountApp {
         println("Number of words: $wordCount, unique: $uniqueWordCount")
     }
 
-    private fun invalidCliArgs() {
-        System.out.println("Invalid CLI arguments!")
+    private fun invalidCliArgs(args: Array<String>) {
+        System.out.println("Invalid CLI arguments! (${args.contentToString()})\nExpected either none or one argument (filepath)")
     }
+
 }

@@ -13,17 +13,19 @@ class WordCounter(
         if (text.isEmpty() || text.isBlank()) {
             return CountResult.empty
         }
-
-        val words = multiWhitespacePattern.matcher(text).replaceAll(" ")
-            .split(" ", "-")
-            .map { it.removeSuffix(".") }
-            .filter { wordPattern.matcher(it).matches() }
-            .filterNot(stopWordsFilter)
-
+        val words = splitText(text)
         return CountResult(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size
         )
+    }
+
+    private fun splitText(text: String): List<String> {
+        return multiWhitespacePattern.matcher(text).replaceAll(" ")
+            .split(" ", "-")
+            .map { it.removeSuffix(".") }
+            .filter { wordPattern.matcher(it).matches() }
+            .filterNot(stopWordsFilter)
     }
 
 }

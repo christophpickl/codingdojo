@@ -34,7 +34,9 @@ class WordCountAppIntegrationTest {
             WordCountApp.main(arrayOf("arg1", "arg2"))
         }
         assertThat(printed, allOf(
-            containsSubstring("Invalid CLI arguments!")
+            containsSubstring("Invalid CLI arguments!"),
+            containsSubstring("arg1"),
+            containsSubstring("arg2")
         ))
     }
 
