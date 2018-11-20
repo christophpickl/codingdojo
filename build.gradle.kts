@@ -19,3 +19,7 @@ tasks {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
+
+tasks.withType(Test::class.java).all {
+    useTestNG()
+}
