@@ -16,7 +16,8 @@ class WordCounter(
         val words = splitText(text)
         return CountResult(
             wordCount = words.size,
-            uniqueWordCount = words.distinct().size
+            uniqueWordCount = words.distinct().size,
+            averageLength = 42.0 // FIXME implement me
         )
     }
 
@@ -32,9 +33,10 @@ class WordCounter(
 
 data class CountResult(
     val wordCount: Int,
-    val uniqueWordCount: Int
+    val uniqueWordCount: Int,
+    val averageLength: Double
 ) {
     companion object {
-        val empty = CountResult(0, 0)
+        val empty = CountResult(0, 0, 0.0)
     }
 }
