@@ -11,4 +11,12 @@ class WordCounterTest {
         assertThat(WordCounter().count(""), equalTo(0))
     }
 
+    fun `When counting single word Then return 1`() {
+        assertThat(WordCounter().count("a"), equalTo(1))
+    }
+
+    fun `When counting two words separated by space Then return 2`() {
+        assertThat(WordCounter().count("a b"), equalTo(2))
+    }
+
 }
