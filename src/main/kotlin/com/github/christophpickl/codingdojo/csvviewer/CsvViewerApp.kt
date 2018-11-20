@@ -3,13 +3,14 @@ package com.github.christophpickl.codingdojo.csvviewer
 import java.io.File
 
 object CsvViewerApp {
+
     @JvmStatic
     fun main(args: Array<String>) {
         if (args.size != 1) {
             println("Must define filename as application argument!")
             return
         }
-        val csv = CsvReader.read(readLinesOf(args[0]).joinToString("\n"))
+        val csv = CsvReader.read(readLinesOf(args[0]))
         println(CsvFormatter.format(csv))
     }
 
@@ -18,4 +19,5 @@ object CsvViewerApp {
             ?: throw IllegalArgumentException("File does not exist at classpath: $classpath")
         return File(resource.toURI()).readLines()
     }
+    
 }
