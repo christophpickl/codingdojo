@@ -21,7 +21,7 @@ class WordCounterIntegrationTest {
 
     fun `Given counter using real stopwords When use sample sentence from requirements 4 Then return proper result`() {
         assertThat(counter().count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."),
-            equalTo(CountResult(wordCount = 9, uniqueWordCount = 7)))
+            equalTo(CountResult(wordCount = 7, uniqueWordCount = 6)))
     }
 
     private fun counter() = WordCounter(buildStopWordsFilter())

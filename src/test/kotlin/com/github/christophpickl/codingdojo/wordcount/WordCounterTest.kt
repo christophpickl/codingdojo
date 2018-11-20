@@ -49,8 +49,8 @@ class WordCounterTest {
         assertThat(counter().count("aaa.").wordCount, equalTo(1))
     }
 
-    fun `When passing words seperated by dash Then word count is 2`() {
-        assertThat(counter().count("a-a").wordCount, equalTo(2))
+    fun `When passing words seperated by dash Then treat as single word`() {
+        assertThat(counter().count("a-a").wordCount, equalTo(1))
     }
 
     fun `When passing two same words Then unique word count is 1`() {
