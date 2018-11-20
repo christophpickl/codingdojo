@@ -2,10 +2,13 @@ package com.github.christophpickl.codingdojo.wordcount
 
 import java.io.File
 
-class StopWordsFilter(
-    private val stopWords: List<String>
-) {
-    fun isStopWord(word: String) = stopWords.contains(word)
+typealias StopWordsFilter = (String) -> Boolean
+
+private const val stopWordsClasspath = "/stopwords.txt"
+
+fun buildStopWordsFilter(): StopWordsFilter {
+    val stopWords = StopWordsLoader.load(stopWordsClasspath)
+    return { word: String -> stopWords.contains(word) }
 }
 
 object StopWordsLoader {

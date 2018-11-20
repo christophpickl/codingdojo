@@ -6,10 +6,10 @@ import com.natpryce.hamkrest.containsSubstring
 import org.testng.annotations.Test
 
 @Test
-class WordCountAppTest {
+class WordCountAppIntegrationTest {
 
     fun `When entering two words Then print out the result of 2`() {
-        val printed = IoTestUtil.readAndWrite("a b\n") {
+        val printed = IoTestUtil.readAndWrite("x y\n") {
             WordCountApp.main(emptyArray())
         }
         assertThat(printed, allOf(
@@ -19,4 +19,3 @@ class WordCountAppTest {
     }
 
 }
-
