@@ -7,7 +7,7 @@ class WordCounter {
     private val multiWhitespace = Pattern.compile("\\s+")
 
     fun count(text: String): Int {
-        if (text.isEmpty()) {
+        if (text.isEmpty() || text.isBlank()) {
             return 0
         }
         val cleanedText = multiWhitespace.matcher(text).replaceAll(" ")
