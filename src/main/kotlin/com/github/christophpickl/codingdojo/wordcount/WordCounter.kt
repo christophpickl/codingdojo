@@ -19,7 +19,7 @@ class WordCounter(
             uniqueWordCount = words.distinct().size,
             averageLength = words.map { it.length }.average(),
             // TODO only calculate if index enabled
-            index = emptyList() // FIXME implement me
+            index = words.distinct().sortedWith(String.CASE_INSENSITIVE_ORDER)
         )
     }
 

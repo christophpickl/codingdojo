@@ -57,6 +57,10 @@ class WordCounterTest {
         assertThat(counter().count("a a").uniqueWordCount, equalTo(1))
     }
 
+    fun `When passing some words Then return proper index`() {
+        assertThat(counter().count("C d b a a").index, equalTo(listOf("a", "b", "C", "d")))
+    }
+
     private fun counter() = WordCounter(neverIsStopWord)
 
 }
