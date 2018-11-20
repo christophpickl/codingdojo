@@ -15,4 +15,12 @@ class CsvViewerAppIntegrationTest {
         assertThat(printed, equalTo("Must define filename as application argument!\n"))
     }
 
+    @Test(
+        expectedExceptions = [IllegalArgumentException::class],
+        expectedExceptionsMessageRegExp = """.*invalid\.csv.*"""
+    )
+    fun `When passing invalid file path Then throw`() {
+        CsvViewerApp.main(arrayOf("invalid.csv"))
+    }
+
 }
