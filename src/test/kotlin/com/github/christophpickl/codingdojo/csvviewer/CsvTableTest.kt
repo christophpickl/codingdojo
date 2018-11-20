@@ -6,18 +6,24 @@ import org.testng.annotations.Test
 class CsvTableTest {
 
     fun `When two columns of same row size Then do nothing`() {
-        CsvTable(listOf(
-            CsvColumn("a", listOf("x")),
-            CsvColumn("b", listOf("y"))
-        ))
+        CsvTable(
+            headers = listOf("a", "b"),
+            rowData = listOf(
+                listOf("a1", "b1"),
+                listOf("a2", "b2")
+            )
+        )
     }
 
     @Test(expectedExceptions = [IllegalArgumentException::class])
     fun `When two columns of different row size Then throw`() {
-        CsvTable(listOf(
-            CsvColumn("a", listOf("x")),
-            CsvColumn("b", listOf("y", "y2"))
-        ))
+        CsvTable(
+            headers = listOf("a", "b"),
+            rowData = listOf(
+                listOf("a1", "b1"),
+                listOf("a2")
+            )
+        )
     }
 
 }
