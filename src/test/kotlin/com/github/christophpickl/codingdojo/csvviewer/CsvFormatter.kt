@@ -2,18 +2,23 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 object CsvFormatter {
 
+    private val headerSeparator = "+"
+    private val entrySeparator = "|"
+    private val underline = "-"
+    private val newLine = "\n"
+
     fun format(csv: CsvTable): String {
         return csv.headers.mapIndexed { index, header ->
             header.ensureLength(csv.columnMaxLengths[index])
-        }.joinToString("|") + "\n" +
+        }.joinToString(entrySeparator) + newLine +
             csv.headers.mapIndexed { index, _ ->
-                "-".times(csv.columnMaxLengths[index])
-            }.joinToString("+") + "\n" +
+                underline.times(csv.columnMaxLengths[index])
+            }.joinToString(headerSeparator) + newLine +
             csv.rowData.mapIndexed { _, row ->
                 row.mapIndexed { index, rowEntry ->
                     rowEntry.ensureLength(csv.columnMaxLengths[index])
-                }.joinToString("|")
-            }.joinToString("\n")
+                }.joinToString(entrySeparator)
+            }.joinToString(newLine)
     }
 
     private fun String.ensureLength(desiredLength: Int): String {
