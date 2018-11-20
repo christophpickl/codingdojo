@@ -19,4 +19,8 @@ class WordCounterTest {
         assertThat(WordCounter().count("a b"), equalTo(2))
     }
 
+    fun `When counting two words separated by two spaces Then return 2`() {
+        assertThat(WordCounter().count("a  b"), equalTo(2))
+    }
+
 }
