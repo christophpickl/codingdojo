@@ -5,7 +5,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-const val readFromTextFilePath = "src/test/resources/test_readTextFromThisFile.txt"
+const val readFromTextFilePath = "src/test/resources/wordcount/test_readTextFromThisFile.txt"
 
 @Test
 class TextReaderTest {
