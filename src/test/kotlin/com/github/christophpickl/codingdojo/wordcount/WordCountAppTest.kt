@@ -14,7 +14,7 @@ class WordCountAppTest {
         }
         assertThat(printed, allOf(
             containsSubstring("Enter text:"),
-            containsSubstring("Number of words: 2")
+            containsSubstring("Number of words: 3")
         ))
     }
 
