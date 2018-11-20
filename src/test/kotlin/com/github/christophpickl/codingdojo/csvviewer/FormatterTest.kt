@@ -5,10 +5,10 @@ import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
 @Test
-class CsvFormatterTest {
+class FormatterTest {
 
     fun `When format table without whitespaces Then return proper string`() {
-        assertThat(CsvFormatter.format(CsvTable(
+        assertThat(Formatter.format(Table(
             headers = listOf("H1", "H2"),
             rowData = listOf(
                 listOf("a1", "a2"),
@@ -23,7 +23,7 @@ class CsvFormatterTest {
     }
 
     fun `When header has over length Then indent rows of first column`() {
-        assertThat(CsvFormatter.format(CsvTable(
+        assertThat(Formatter.format(Table(
             headers = listOf("H1a", "H2"),
             rowData = listOf(
                 listOf("a1", "a2"),
@@ -38,7 +38,7 @@ class CsvFormatterTest {
     }
 
     fun `When row has over length Then indent rows of first column including header`() {
-        assertThat(CsvFormatter.format(CsvTable(
+        assertThat(Formatter.format(Table(
             headers = listOf("H1", "H2"),
             rowData = listOf(
                 listOf("a1a", "a2"),

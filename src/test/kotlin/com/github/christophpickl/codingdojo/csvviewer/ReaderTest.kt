@@ -5,15 +5,15 @@ import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
 @Test
-class CsvReaderTest {
+class ReaderTest {
 
     fun `When read some CSV Then return proper structure`() {
-        assertThat(CsvReader.read(listOf(
+        assertThat(Reader.read(listOf(
             "H1;H2",
             "a1;a2",
             "b1;b2"
         )),
-            equalTo(CsvTable(
+            equalTo(Table(
                 headers = listOf("H1", "H2"),
                 rowData = listOf(
                     listOf("a1", "a2"),

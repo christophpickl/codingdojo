@@ -1,16 +1,16 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
-object CsvFormatter {
+object Formatter {
 
     private val headerSeparator = "+"
     private val entrySeparator = "|"
     private val underline = "-"
     private val newLine = "\n"
 
-    fun format(csv: CsvTable): String =
+    fun format(csv: Table): String =
         csv.formatTable()
 
-    private fun CsvTable.formatTable() =
+    private fun Table.formatTable() =
         headers.mapIndexed { index, header ->
             header.ensureLength(columnMaxLengths[index])
         }.joinToString(entrySeparator) + newLine +

@@ -1,6 +1,6 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
-data class CsvTable(
+data class Table(
     val headers: List<String>,
     val rowData: List<List<String>>
 ) {
