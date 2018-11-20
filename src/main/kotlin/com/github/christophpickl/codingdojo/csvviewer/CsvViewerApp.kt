@@ -9,8 +9,8 @@ object CsvViewerApp {
             println("Must define filename as application argument!")
             return
         }
-        val lines = readLinesOf(args[0])
-
+        val csv = CsvReader.read(readLinesOf(args[0]).joinToString("\n"))
+        println(CsvFormatter.format(csv))
     }
 
     private fun readLinesOf(classpath: String): List<String> {

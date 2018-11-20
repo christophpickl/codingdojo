@@ -23,4 +23,21 @@ class CsvViewerAppIntegrationTest {
         CsvViewerApp.main(arrayOf("invalid.csv"))
     }
 
+    fun `When passing persons CSV Then print proper CSV table`() {
+        val printed = IoTestUtil.readFrom {
+            CsvViewerApp.main(arrayOf("persons.csv"))
+        }
+        assertThat(printed, equalTo("""
+            Name     |Age|City     
+            ---------+---+---------
+            Peter    |42 |NewYork  
+            Paul     |57 |London   
+            Mary     |35 |Munich   
+            Jaques   |66 |Paris    
+            Yuri     |23 |Moscow   
+            Stephanie|47 |Stockholm
+            Nadia    |29 |Madrid   ${"\n"}
+        """.trimIndent()))
+    }
+
 }
