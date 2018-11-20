@@ -17,7 +17,7 @@ class WordCounter(
         return CountResult(
             wordCount = words.size,
             uniqueWordCount = words.distinct().size,
-            averageLength = 42.0 // FIXME implement me
+            averageLength = words.map { it.length }.average()
         )
     }
 

@@ -15,20 +15,18 @@ class WordCounterIntegrationTest {
         assertThat(counter().count("THE").wordCount, equalTo(1))
     }
 
-    fun `Given counter using real stopwords When use sample sentence from requirements 3 Then return proper result`() {
+    fun `Given counter using real stopwords When use sample sentence from requirements 3 Then return proper word count`() {
         assertThat(counter().count("Mary had a little lamb").wordCount, equalTo(4))
     }
 
-    fun `Given counter using real stopwords When use sample sentence from requirements 4 Then return proper result`() {
+    fun `Given counter using real stopwords When use sample sentence from requirements 4 Then return proper word counts`() {
         val actual = counter().count("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.")
         assertThat(actual.wordCount, equalTo(7))
         assertThat(actual.uniqueWordCount, equalTo(6))
     }
 
-    @Test(enabled = false) // TODO WIP
-    fun `Given counter using real stopwords When use sample sentence from requirements 6 Then return proper result`() {
-        assertThat(counter().count("a aa aaa aaaa"),
-            equalTo(CountResult(wordCount = 7, uniqueWordCount = 6, averageLength = 2.5)))
+    fun `When pass several words Then return proper average length`() {
+        assertThat(counter().count("x xx xxx xxxx").averageLength, equalTo(2.5))
     }
 
     private fun counter() = WordCounter(buildStopWordsFilter())
