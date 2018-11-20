@@ -41,6 +41,10 @@ class WordCounterTest {
         assertThat(counter().count("a  b"), equalTo(2))
     }
 
+    fun `When counting sample sentence from requirements Then return proper word count`() {
+        assertThat(counter().count("Mary had a little lamb"), equalTo(5))
+    }
+
     private fun counter() = WordCounter(neverIsStopWord)
 
 }
