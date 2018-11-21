@@ -8,6 +8,7 @@ class TestableInputOutput : InputOutput {
     private val _printedText = StringBuilder()
     private val linesToRead = mutableListOf<String>()
     val printedText get() = _printedText.toString()
+    private var _fileToRead: List<String>? = null
 
     override fun print(text: String) {
         _printedText += text
@@ -22,6 +23,13 @@ class TestableInputOutput : InputOutput {
 
     fun addLineToRead(line: String) {
         linesToRead += line
+    }
+
+    override fun readFile(classpath: String): List<String> =
+        _fileToRead ?: throw IllegalStateException("fileToRead was not set")
+
+    fun setFileToRead(fileToRead: List<String>) {
+        _fileToRead = fileToRead
     }
 
 }
