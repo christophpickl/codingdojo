@@ -23,9 +23,9 @@ class CsvViewerAppIntegrationTest {
         CsvViewerApp.main(arrayOf("invalid.csv"))
     }
 
-    fun `When passing persons CSV Then print proper CSV table`() {
+    fun `When passing test persons CSV Then print proper CSV table`() {
         val printed = IoUtil.readFrom {
-            CsvViewerApp.main(arrayOf("persons.csv"))
+            CsvViewerApp.main(arrayOf("test_persons.csv"))
         }
         assertThat(printed, equalTo("""
             Name     |Age|City     
