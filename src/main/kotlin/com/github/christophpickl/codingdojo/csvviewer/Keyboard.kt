@@ -1,6 +1,8 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
+import kotlin.reflect.KClass
 
 object Keyboard {
     @JvmStatic
@@ -15,6 +17,9 @@ object Keyboard {
             print(">> ")
             input = readLine() ?: ""
             choice = MenuChoice.findByKey(input)
+            if (choice == null && input.toIntOrNull() != null) {
+                choice = PageChoice(input.toInt() - 1)
+            }
         } while (choice == null)
         return choice
     }
@@ -22,7 +27,16 @@ object Keyboard {
 
 sealed class UserChoice {
 
-    class SelectPage(
+    companion object {
+        val allChoices: List<KClass<out UserChoice>> by lazy {
+            ArrayList<KClass<out UserChoice>>().apply {
+                this += PageChoice::class
+                this += MenuChoice.allChoices.map { it::class }
+            }
+        }
+    }
+
+    class PageChoice(
         val requestedPage: Int
     ) : UserChoice()
 
@@ -37,14 +51,14 @@ sealed class UserChoice {
                 listOf(NextPage, PreviousPage, FirstPage, LastPage, Exit).sortedBy { it.order }
             }
 
-            fun findByKey(key: String): UserChoice? = allChoices.find { it.key == key }
+            fun findByKey(key: String): MenuChoice? = allChoices.find { it.key == key }
         }
 
 
         object NextPage : MenuChoice(order = 1, key = "n", label = "N(ext page")
         object PreviousPage : MenuChoice(order = 2, key = "p", label = "P(revious page")
         object FirstPage : MenuChoice(order = 3, key = "f", label = "F(irst page")
-        object LastPage : MenuChoice(order = 4, key = "k", label = "L(ast page")
+        object LastPage : MenuChoice(order = 4, key = "l", label = "L(ast page")
         object Exit : MenuChoice(order = 5, key = "x", label = "eX(it")
 
     }

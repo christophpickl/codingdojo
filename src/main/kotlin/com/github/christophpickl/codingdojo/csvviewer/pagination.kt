@@ -7,7 +7,7 @@ class Paginator(
 
     private var currentPage = 0
 
-    private val maxPage = Math.ceil(totalRows / pageSize.toDouble()).toInt() - 1
+    val maxPage = Math.ceil(totalRows / pageSize.toDouble()).toInt() - 1
     val currentPageRequest get() = PageRequest(pageSize * currentPage, pageSize)
     val pageDisplay get() = "Page ${currentPage + 1} of ${maxPage + 1}"
 
@@ -29,6 +29,11 @@ class Paginator(
 
     fun lastPage() {
         currentPage = maxPage
+    }
+
+    fun selectPage(requestedPage: Int) {
+        require(requestedPage in 0..maxPage)
+        currentPage = requestedPage
     }
 
 }

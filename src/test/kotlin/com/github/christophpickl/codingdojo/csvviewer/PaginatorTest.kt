@@ -69,4 +69,22 @@ class PaginatorTest {
         assertThat(paginator.pageDisplay, equalTo("Page 1 of 3"))
     }
 
+    fun `Given 3 rows and page size of 1 When select page 1 Then current page is 1`() {
+        val paginator = Paginator(pageSize = 1, totalRows = 3)
+        paginator.selectPage(1)
+        assertThat(paginator.currentPageRequest, equalTo(PageRequest(1, 1)))
+    }
+
+    @Test(expectedExceptions = [IllegalArgumentException::class])
+    fun `Given 3 rows and page size of 1 When select too low page Then throw`() {
+        val paginator = Paginator(pageSize = 1, totalRows = 3)
+        paginator.selectPage(-1)
+    }
+
+    @Test(expectedExceptions = [IllegalArgumentException::class])
+    fun `Given 3 rows and page size of 1 When select too big page Then throw`() {
+        val paginator = Paginator(pageSize = 1, totalRows = 3)
+        paginator.selectPage(3)
+    }
+
 }
