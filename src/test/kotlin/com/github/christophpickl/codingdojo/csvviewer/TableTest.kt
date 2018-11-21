@@ -17,13 +17,17 @@ class TableTest {
         )
     }
 
-    @Test(expectedExceptions = [IllegalArgumentException::class])
-    fun `init - When two columns of different row size Then throw`() {
+    @Test(
+        expectedExceptions = [IllegalArgumentException::class],
+        expectedExceptionsMessageRegExp = """.*a3.*"""
+    )
+    fun `init - When two columns of different row size Then throw with proper row indicator`() {
         Table(
             headers = listOf("a", "b"),
             rowData = listOf(
                 listOf("a1", "b1"),
-                listOf("a2")
+                listOf("a2", "b2"),
+                listOf("a3")
             )
         )
     }

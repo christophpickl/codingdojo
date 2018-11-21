@@ -12,7 +12,10 @@ data class Table(
     init {
         val sizes = rowData.map { it.size }.distinct()
         require(sizes.size <= 1) {
-            "Rows must have all same column size, but was: $sizes"
+            val rowsGroupedByColumnEntries = rowData.groupBy { it.size }
+            val minSize = rowsGroupedByColumnEntries.minBy { it.value.size }!!
+            val flawedRows = rowsGroupedByColumnEntries[minSize.key]!!
+            "Rows must have all same column size, but was: $sizes\nFlawed rows (length=${minSize.key}):\n${flawedRows.joinToString("\n")}"
         }
     }
 
