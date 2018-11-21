@@ -5,9 +5,15 @@ data class Table(
     val rowData: List<List<String>>
 ) {
 
+    companion object {
+        val empty = Table(emptyList(), emptyList())
+    }
+
     init {
-        require(headers.isNotEmpty()) { "At least one column must be defined!" }
-        require(rowData.map { it.size }.distinct().size == 1) { "Rows must have all same column size!" }
+        val sizes = rowData.map { it.size }.distinct()
+        require(sizes.size <= 1) {
+            "Rows must have all same column size, but was: $sizes"
+        }
     }
 
     private val allLines = ArrayList<List<String>>().apply {
