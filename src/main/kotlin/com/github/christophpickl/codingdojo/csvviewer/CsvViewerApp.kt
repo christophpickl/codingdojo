@@ -19,7 +19,7 @@ object CsvViewerApp {
             return
         }
         val table = Reader.read(readLinesOf(args[0]))
-        val viewer = CsvViewer(table, pageSize)
+        val viewer = CsvViewer(table = table, pageSize = pageSize)
         viewer.renderNext()
     }
 

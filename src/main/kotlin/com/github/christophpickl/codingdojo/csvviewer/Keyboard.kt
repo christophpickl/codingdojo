@@ -2,24 +2,30 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
+import com.github.christophpickl.codingdojo.doUntilNotNull
 
-object Keyboard {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        readNext()
-    }
+class Keyboard(
+    private val io: InputOutput = SystemInputOutput
+) {
+
+    private val prompt = ">> "
+    
     fun readNext(): UserChoice {
-        var input: String
-        var choice: UserChoice?
-        println(MenuChoice.allChoices.joinToString(", ") { it.label })
-        do {
-            print(">> ")
-            input = readLine() ?: ""
-            choice = MenuChoice.findByKey(input)
-            if (choice == null && input.toIntOrNull() != null) {
-                choice = PageChoice(input.toInt() - 1)
-            }
-        } while (choice == null)
+        printMenu()
+        return doUntilNotNull(::tryReadNext)
+    }
+
+    private fun printMenu() {
+        io.println(MenuChoice.allChoices.joinToString(", ") { it.label })
+    }
+    
+    private fun tryReadNext(): UserChoice? {
+        io.print(prompt)
+        val input = io.readLine()
+        var choice: UserChoice? = MenuChoice.findByKey(input)
+        if (choice == null && input.toIntOrNull() != null) {
+            choice = PageChoice(input.toInt() - 1)
+        }
         return choice
     }
 }
@@ -51,5 +57,7 @@ sealed class UserChoice {
         object Exit : MenuChoice(order = 5, key = "x", label = "eX(it")
 
     }
+
+    override fun toString(): String = javaClass.simpleName
 
 }
