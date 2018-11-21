@@ -1,10 +1,11 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.Exit
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.FirstPage
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.LastPage
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.NextPage
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PreviousPage
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.Exit
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.FirstPage
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.LastPage
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.NextPage
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.PreviousPage
 
 class CsvViewer(
     private val table: Table,
@@ -12,7 +13,7 @@ class CsvViewer(
 ) {
 
     private val paginator = Paginator(pageSize, table.rows)
-    private val choiceCommands = UserChoice.values().associate {
+    private val choiceCommands = MenuChoice.allChoices.associate {
         it to when (it) {
             NextPage -> fun() {
                 paginator.nextPage()

@@ -1,6 +1,7 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.IoUtil
+import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
 import com.natpryce.hamkrest.equalTo
@@ -9,7 +10,7 @@ import org.testng.annotations.Test
 @Test(groups = ["csvviewer"], timeOut = 500)
 class CsvViewerAppIntegrationTest {
 
-    private val exitCommand = "${UserChoice.Exit.key}\n"
+    private val exitCommand = "${MenuChoice.Exit.key}\n"
 
     fun `When passing empty cli args Then print error message`() {
         val printed = IoUtil.readFrom {
