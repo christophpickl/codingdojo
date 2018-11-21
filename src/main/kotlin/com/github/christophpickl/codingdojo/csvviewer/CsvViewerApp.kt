@@ -4,23 +4,29 @@ import java.io.File
 
 object CsvViewerApp {
 
-    const val invalidArgsMessage = "Must define filename as application argument!"
-    private const val defaultPageSize = 10
+    // TODO io testable => outsource separate class
+    private val io = SystemInputOutput
 
     @JvmStatic
-    fun main(args: Array<String>) {
-        if (args.size != 1 && args.size != 2) {
-            println(invalidArgsMessage)
-            return
+    fun main(cliArgs: Array<String>) {
+        when (val args = ArgsParser.parse(cliArgs)) {
+            is Args.RightArgs -> {
+                start(args)
+            }
+            is Args.WrongArgs -> {
+                io.println(args.message)
+            }
         }
-        val pageSize = if (args.size >= 2) args[1].toInt() else defaultPageSize
-        if (pageSize <= 0) {
-            println("Page size must be a positive, non-null number! (was: $pageSize)")
-            return
+    }
+
+    private fun start(args: Args.RightArgs) {
+        try {
+            val table = Reader.read(readLinesOf(args.csvFile))
+            val viewer = CsvViewer(table = table, pageSize = args.pageSize)
+            viewer.startCommandLoop()
+        } catch (e: Exception) {
+            io.println("[EXCEPTION] ${e.message ?: "N/A"}")
         }
-        val table = Reader.read(readLinesOf(args[0]))
-        val viewer = CsvViewer(table = table, pageSize = pageSize)
-        viewer.renderNext()
     }
 
     private fun readLinesOf(classpath: String): List<String> {

@@ -2,9 +2,9 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.IoUtil
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
+import com.natpryce.hamkrest.allOf
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
-import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
 @Test(groups = ["csvviewer"], timeOut = 500)
@@ -16,22 +16,17 @@ class CsvViewerAppIntegrationTest {
         val printed = IoUtil.readFrom {
             CsvViewerApp.main(emptyArray())
         }
-        assertThat(printed, equalTo("${CsvViewerApp.invalidArgsMessage}\n"))
+        assertThat(printed, containsSubstring("[ERROR]"))
     }
 
-    fun `When passing three cli args Then print error message`() {
+    fun `When passing invalid file path Then print exception`() {
         val printed = IoUtil.readFrom {
-            CsvViewerApp.main(arrayOf("1", "2", "3"))
+            CsvViewerApp.main(arrayOf("invalid.csv"))
         }
-        assertThat(printed, equalTo("${CsvViewerApp.invalidArgsMessage}\n"))
-    }
-
-    @Test(
-        expectedExceptions = [IllegalArgumentException::class],
-        expectedExceptionsMessageRegExp = """.*invalid\.csv.*"""
-    )
-    fun `When passing invalid file path Then throw`() {
-        CsvViewerApp.main(arrayOf("invalid.csv"))
+        assertThat(printed, allOf(
+            containsSubstring("[EXCEPTION]"),
+            containsSubstring("invalid.csv")
+        ))
     }
 
     fun `When passing test persons CSV Then print proper CSV table`() {

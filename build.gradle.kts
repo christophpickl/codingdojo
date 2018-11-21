@@ -7,6 +7,7 @@ plugins {
 
 dependencies {
     implementation(kotlin("stdlib"))
+    implementation(kotlin("reflect"))
     testImplementation("org.testng:testng:6.14.3")
     testImplementation("com.natpryce:hamkrest:1.6.0.0")
 }

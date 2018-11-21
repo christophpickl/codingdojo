@@ -11,7 +11,11 @@ class CsvViewer(
 
     private val paginator = Paginator(pageSize, table.rows)
 
-    fun renderNext() {
+    fun startCommandLoop() {
+        renderNext()
+    }
+
+    private fun renderNext() {
         println(Formatter.format(table, paginator.currentPageRequest))
         println(paginator.pageDisplay)
 
