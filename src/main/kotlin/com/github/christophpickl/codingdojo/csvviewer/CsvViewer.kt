@@ -4,7 +4,7 @@ import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice.*
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
 
 class CsvViewer(
-    private val keyboard: Keyboard = Keyboard(),
+    private val userPrompter: UserPrompter = UserPrompter(),
     private val table: Table,
     pageSize: Int
 ) {
@@ -15,7 +15,7 @@ class CsvViewer(
         println(Formatter.format(table, paginator.currentPageRequest))
         println(paginator.pageDisplay)
 
-        when (val choice = keyboard.readNext()) {
+        when (val choice = userPrompter.readNext()) {
             is PageChoice -> {
                 if (choice.requestedPage in 0..paginator.maxPage) {
                     paginator.selectPage(choice.requestedPage)

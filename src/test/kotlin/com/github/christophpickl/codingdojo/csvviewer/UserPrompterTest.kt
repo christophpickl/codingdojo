@@ -9,20 +9,20 @@ import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
 
 @Test(groups = ["csvviewer"])
-class KeyboardTest {
+class UserPrompterTest {
 
-    private lateinit var keyboard: Keyboard
+    private lateinit var userPrompter: UserPrompter
     private lateinit var io: TestableInputOutput
 
     @BeforeMethod
-    fun `init keyboard`() {
+    fun `init state`() {
         io = TestableInputOutput()
-        keyboard = Keyboard(io = io)
+        userPrompter = UserPrompter(io = io)
     }
 
     fun `When read next Then print at least menu along with prompt`() {
         io.addLineToRead("n")
-        keyboard.readNext()
+        userPrompter.readNext()
         assertThat(io.printedText, equalTo("N(ext page, P(revious page, F(irst page, L(ast page, eX(it\n>> "))
     }
 
@@ -38,14 +38,14 @@ class KeyboardTest {
     @Test(dataProvider = "providerUserChoices")
     fun `When read proper key Then return user choice `(key: String, givenChoice: UserChoice) {
         io.addLineToRead(key)
-        val choice = keyboard.readNext()
+        val choice = userPrompter.readNext()
         assertThat(choice, equalTo(givenChoice))
     }
 
     fun `When read next and pass integer Then return selected page but 0 base indexed`() {
         io.addLineToRead("1")
 
-        val choice = keyboard.readNext()
+        val choice = userPrompter.readNext()
 
         assertThat(choice is PageChoice, equalTo(true))
         assertThat((choice as PageChoice).requestedPage, equalTo(0))

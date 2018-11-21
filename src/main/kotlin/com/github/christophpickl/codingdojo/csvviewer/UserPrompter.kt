@@ -4,7 +4,7 @@ import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
 import com.github.christophpickl.codingdojo.doUntilNotNull
 
-class Keyboard(
+class UserPrompter(
     private val io: InputOutput = SystemInputOutput
 ) {
 
