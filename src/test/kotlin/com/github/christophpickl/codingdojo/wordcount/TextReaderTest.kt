@@ -7,12 +7,12 @@ import org.testng.annotations.Test
 
 const val readFromTextFilePath = "src/test/resources/wordcount/test_readTextFromThisFile.txt"
 
-@Test
+@Test(groups = ["wordcount"])
 class TextReaderTest {
 
     fun `askInteractivelyTextReader - When enter some text Then return that entered text`() {
         val someText = "foo bar"
-        IoUtil.writeTo(someText) {
+        IoUtil.readAndWrite(someText) {
             assertThat(askInteractivelyTextReader(),
                 equalTo(someText))
         }

@@ -2,11 +2,14 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.IoUtil
 import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.containsSubstring
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"], timeOut = 500)
 class CsvViewerAppIntegrationTest {
+
+    private val exitCommand = "${UserChoice.Exit.key}\n"
 
     fun `When passing empty cli args Then print error message`() {
         val printed = IoUtil.readFrom {
@@ -31,10 +34,10 @@ class CsvViewerAppIntegrationTest {
     }
 
     fun `When passing test persons CSV Then print proper CSV table`() {
-        val printed = IoUtil.readFrom {
+        val printed = IoUtil.readAndWrite(exitCommand) {
             CsvViewerApp.main(arrayOf("test_persons.csv"))
         }
-        assertThat(printed, equalTo("""
+        assertThat(printed, containsSubstring("""
             Name     |Age|City     
             ---------+---+---------
             Peter    |42 |NewYork  
@@ -43,19 +46,19 @@ class CsvViewerAppIntegrationTest {
             Jaques   |66 |Paris    
             Yuri     |23 |Moscow   
             Stephanie|47 |Stockholm
-            Nadia    |29 |Madrid   ${"\n"}
+            Nadia    |29 |Madrid   
         """.trimIndent()))
     }
 
     fun `When passing test persons CSV and page size Then print proper CSV table`() {
-        val printed = IoUtil.readFrom {
+        val printed = IoUtil.readAndWrite(exitCommand) {
             CsvViewerApp.main(arrayOf("test_persons.csv", "2"))
         }
-        assertThat(printed, equalTo("""
-            Name     |Age|City
+        assertThat(printed, containsSubstring("""
+            Name     |Age|City     
             ---------+---+---------
-            Peter    |42 |NewYork
-            Paul     |57 |London   ${"\n"}
+            Peter    |42 |NewYork  
+            Paul     |57 |London   
         """.trimIndent()))
     }
 

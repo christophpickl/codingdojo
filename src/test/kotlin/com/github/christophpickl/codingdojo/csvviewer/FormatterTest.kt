@@ -4,7 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"])
 class FormatterTest {
 
     private val twoRowedAndOneColumnedTable = Table(

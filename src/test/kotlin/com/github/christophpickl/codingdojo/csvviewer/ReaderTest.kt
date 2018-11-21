@@ -4,7 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"])
 class ReaderTest {
 
     fun `When read empty CSV Then return empty table`() {

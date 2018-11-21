@@ -7,7 +7,7 @@ import com.natpryce.hamkrest.containsSubstring
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["wordcount"], timeOut = 500)
 class WordCountAppIntegrationTest {
 
     fun `Given app without CLI args When entering two words Then print out the result of 2`() {

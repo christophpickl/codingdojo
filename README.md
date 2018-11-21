@@ -6,5 +6,10 @@ https://ccd-school.de/coding-dojo/
 
 Following katas are implemented:
 
-* CSV Viewer
-* Word count
+## CSV Viewer
+
+Run the tests: `$ ./gradlew testCsvViewer`
+
+## Word count
+
+Run the tests: `$ ./gradlew testWordCount`

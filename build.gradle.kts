@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.10"
+    id("com.adarshr.test-logger") version "1.6.0"
 }
 
 dependencies {
@@ -22,4 +23,17 @@ tasks.withType(KotlinCompile::class.java).all {
 
 tasks.withType(Test::class.java).all {
     useTestNG()
+}
+
+task("testCsvViewer", Test::class) {
+    useTestNG(closureOf<TestNGOptions> {
+        includeGroups = setOf("csvviewer")
+    })
+
+}
+
+task("testWordCount", Test::class) {
+    useTestNG(closureOf<TestNGOptions> {
+        includeGroups = setOf("wordcount")
+    })
 }

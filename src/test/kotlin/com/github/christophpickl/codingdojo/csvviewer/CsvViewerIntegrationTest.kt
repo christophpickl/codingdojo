@@ -6,7 +6,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"])
 class CsvViewerIntegrationTest {
 
     private val tableOneColumnTwoRows = Table(listOf("a"), listOf(listOf("1"), listOf("2")))

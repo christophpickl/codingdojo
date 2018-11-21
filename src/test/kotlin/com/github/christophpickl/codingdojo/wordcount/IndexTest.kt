@@ -5,7 +5,7 @@ import com.natpryce.hamkrest.equalTo
 import com.natpryce.hamkrest.sameInstance
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["wordcount"])
 class IndexTest {
 
     fun `When build filter with empty array Then return disabled dict instance`() {

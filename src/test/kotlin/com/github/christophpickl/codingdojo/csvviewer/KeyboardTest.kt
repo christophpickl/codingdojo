@@ -7,10 +7,10 @@ import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.DataProvider
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"])
 class KeyboardTest {
 
-    fun `foo bar`() {
+    fun `When read next Then print at least menu along with prompt`() {
         val printed = IoUtil.readAndWrite("n\n") {
             val choice = Keyboard.readNext()
             assertThat(choice, equalTo(UserChoice.NextPage))

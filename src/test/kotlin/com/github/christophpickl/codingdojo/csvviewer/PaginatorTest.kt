@@ -4,7 +4,7 @@ import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.equalTo
 import org.testng.annotations.Test
 
-@Test
+@Test(groups = ["csvviewer"])
 class PaginatorTest {
 
     fun `Given 2 rows and page size of 1 When get current page Then return skip 0 and take 1`() {
