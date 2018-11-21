@@ -64,4 +64,9 @@ class PaginatorTest {
         assertThat(next, equalTo(last))
     }
 
+    fun `Given 3 rows and page size of 1 When get page display Then show 1 of 3`() {
+        val paginator = Paginator(pageSize = 1, totalRows = 3)
+        assertThat(paginator.pageDisplay, equalTo("Page 1 of 3"))
+    }
+
 }

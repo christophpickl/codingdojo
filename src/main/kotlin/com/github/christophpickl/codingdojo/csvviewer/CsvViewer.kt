@@ -38,6 +38,7 @@ class CsvViewer(
 
     fun view() {
         println(Formatter.format(table, paginator.currentPageRequest))
+        println(paginator.pageDisplay)
         val choice = Keyboard.readNext()
         choiceCommands[choice]!!()
     }

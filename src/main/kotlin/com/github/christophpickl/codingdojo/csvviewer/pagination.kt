@@ -9,6 +9,7 @@ class Paginator(
 
     private val maxPage = Math.ceil(totalRows / pageSize.toDouble()).toInt() - 1
     val currentPageRequest get() = PageRequest(pageSize * currentPage, pageSize)
+    val pageDisplay get() = "Page ${currentPage + 1} of ${maxPage + 1}"
 
     fun nextPage() {
         if (currentPage != maxPage) {
