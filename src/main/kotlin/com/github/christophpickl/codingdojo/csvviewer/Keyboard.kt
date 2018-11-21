@@ -2,7 +2,6 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
 import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
-import kotlin.reflect.KClass
 
 object Keyboard {
     @JvmStatic
@@ -27,15 +26,6 @@ object Keyboard {
 
 sealed class UserChoice {
 
-    companion object {
-        val allChoices: List<KClass<out UserChoice>> by lazy {
-            ArrayList<KClass<out UserChoice>>().apply {
-                this += PageChoice::class
-                this += MenuChoice.allChoices.map { it::class }
-            }
-        }
-    }
-
     class PageChoice(
         val requestedPage: Int
     ) : UserChoice()
@@ -53,7 +43,6 @@ sealed class UserChoice {
 
             fun findByKey(key: String): MenuChoice? = allChoices.find { it.key == key }
         }
-
 
         object NextPage : MenuChoice(order = 1, key = "n", label = "N(ext page")
         object PreviousPage : MenuChoice(order = 2, key = "p", label = "P(revious page")

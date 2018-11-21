@@ -20,7 +20,7 @@ object CsvViewerApp {
         }
         val table = Reader.read(readLinesOf(args[0]))
         val viewer = CsvViewer(table, pageSize)
-        viewer.view()
+        viewer.renderNext()
     }
 
     private fun readLinesOf(classpath: String): List<String> {

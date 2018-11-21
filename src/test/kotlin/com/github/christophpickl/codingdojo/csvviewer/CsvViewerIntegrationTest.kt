@@ -13,7 +13,7 @@ class CsvViewerIntegrationTest {
 
     fun `Given page size equals 1 When choose exit Then print table with one row`() {
         val printed = IoUtil.readAndWrite("x\n") {
-            CsvViewer(table = tableOneColumnTwoRows, pageSize = 1).view()
+            CsvViewer(table = tableOneColumnTwoRows, pageSize = 1).renderNext()
         }
         assertThat(printed, containsSubstring("""
             No.|a
@@ -24,7 +24,7 @@ class CsvViewerIntegrationTest {
 
     fun `Given page size equals 1 When choose next and exit Then print two proper tables`() {
         val printed = IoUtil.readAndWrite("n\nx\n") {
-            CsvViewer(table = tableOneColumnTwoRows, pageSize = 1).view()
+            CsvViewer(table = tableOneColumnTwoRows, pageSize = 1).renderNext()
         }
         assertThat(printed, allOf(
             containsSubstring("""

@@ -14,33 +14,32 @@ class CsvViewer(
 
     private val paginator = Paginator(pageSize, table.rows)
 
-    fun view() {
+    fun renderNext() {
         println(Formatter.format(table, paginator.currentPageRequest))
         println(paginator.pageDisplay)
-        val choice = Keyboard.readNext()
 
-        when (choice) {
+        when (val choice = Keyboard.readNext()) {
             is PageChoice -> {
                 if (choice.requestedPage in 0..paginator.maxPage) {
                     paginator.selectPage(choice.requestedPage)
                 }
-                view()
+                renderNext()
             }
             is NextPage -> {
                 paginator.nextPage()
-                view()
+                renderNext()
             }
             is PreviousPage -> {
                 paginator.previousPage()
-                view()
+                renderNext()
             }
             is FirstPage -> {
                 paginator.firstPage()
-                view()
+                renderNext()
             }
             is LastPage -> {
                 paginator.lastPage()
-                view()
+                renderNext()
             }
             is Exit -> {
                 println("Good bye :)")
