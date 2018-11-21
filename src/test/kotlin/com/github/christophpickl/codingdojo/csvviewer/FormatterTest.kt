@@ -24,10 +24,10 @@ class FormatterTest {
 
     fun `When format table without whitespaces Then return proper string`() {
         assertThat(Formatter.format(twoRowedAndTwoColumnedTable), equalTo("""
-            H1|H2
-            --+--
-            a1|a2
-            b1|b2
+            No.|H1|H2
+            ---+--+--
+            1. |a1|a2
+            2. |b1|b2
         """.trimIndent()))
     }
 
@@ -39,10 +39,10 @@ class FormatterTest {
                 listOf("b1", "b2")
             )
         )), equalTo("""
-            H1a|H2
-            ---+--
-            a1 |a2
-            b1 |b2
+            No.|H1a|H2
+            ---+---+--
+            1. |a1 |a2
+            2. |b1 |b2
         """.trimIndent()))
     }
 
@@ -54,26 +54,26 @@ class FormatterTest {
                 listOf("b1", "b2")
             )
         )), equalTo("""
-            H1 |H2
-            ---+--
-            a1a|a2
-            b1 |b2
+            No.|H1 |H2
+            ---+---+--
+            1. |a1a|a2
+            2. |b1 |b2
         """.trimIndent()))
     }
 
     fun `When format table with 2 rows but page of skip 0 and take 1 Then return first row`() {
         assertThat(Formatter.format(twoRowedAndOneColumnedTable, PageRequest(skip = 0, take = 1)), equalTo("""
-            H
-            -
-            a
+            No.|H
+            ---+-
+            1. |a
         """.trimIndent()))
     }
 
     fun `When format table with 2 rows but page of skip 1 and take 1 Then return first row`() {
         assertThat(Formatter.format(twoRowedAndOneColumnedTable, PageRequest(skip = 1, take = 1)), equalTo("""
-            H
-            -
-            b
+            No.|H
+            ---+-
+            2. |b
         """.trimIndent()))
     }
 

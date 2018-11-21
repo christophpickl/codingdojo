@@ -38,15 +38,15 @@ class CsvViewerAppIntegrationTest {
             CsvViewerApp.main(arrayOf("test_persons.csv"))
         }
         assertThat(printed, containsSubstring("""
-            Name     |Age|City     
-            ---------+---+---------
-            Peter    |42 |NewYork  
-            Paul     |57 |London   
-            Mary     |35 |Munich   
-            Jaques   |66 |Paris    
-            Yuri     |23 |Moscow   
-            Stephanie|47 |Stockholm
-            Nadia    |29 |Madrid   
+            No.|Name     |Age|City     
+            ---+---------+---+---------
+            1. |Peter    |42 |NewYork  
+            2. |Paul     |57 |London   
+            3. |Mary     |35 |Munich   
+            4. |Jaques   |66 |Paris    
+            5. |Yuri     |23 |Moscow   
+            6. |Stephanie|47 |Stockholm
+            7. |Nadia    |29 |Madrid   
         """.trimIndent()))
     }
 
@@ -55,10 +55,10 @@ class CsvViewerAppIntegrationTest {
             CsvViewerApp.main(arrayOf("test_persons.csv", "2"))
         }
         assertThat(printed, containsSubstring("""
-            Name     |Age|City     
-            ---------+---+---------
-            Peter    |42 |NewYork  
-            Paul     |57 |London   
+            No.|Name     |Age|City     
+            ---+---------+---+---------
+            1. |Peter    |42 |NewYork  
+            2. |Paul     |57 |London   
         """.trimIndent()))
     }
 

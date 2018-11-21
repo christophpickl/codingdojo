@@ -16,9 +16,9 @@ class CsvViewerIntegrationTest {
             CsvViewer(table = tableOneColumnTwoRows, pageSize = 1).view()
         }
         assertThat(printed, containsSubstring("""
-            a
-            -
-            1
+            No.|a
+            ---+-
+            1. |1
         """.trimIndent()))
     }
 
@@ -28,14 +28,14 @@ class CsvViewerIntegrationTest {
         }
         assertThat(printed, allOf(
             containsSubstring("""
-            a
-            -
-            1
+            No.|a
+            ---+-
+            1. |1
         """.trimIndent()),
             containsSubstring("""
-            a
-            -
-            2
+            No.|a
+            ---+-
+            2. |2
         """.trimIndent())
         ))
     }

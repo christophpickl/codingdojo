@@ -2,13 +2,28 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 object Formatter {
 
-    private val headerSeparator = "+"
-    private val entrySeparator = "|"
-    private val underline = "-"
-    private val newLine = "\n"
+    private const val headerSeparator = "+"
+    private const val entrySeparator = "|"
+    private const val underline = "-"
+    private const val newLine = "\n"
 
-    fun format(csv: Table, pageRequest: PageRequest = PageRequest.all): String =
-        csv.formatTable(pageRequest)
+    fun format(table: Table, pageRequest: PageRequest = PageRequest.all): String =
+        table.enhanceNumberColumn().formatTable(pageRequest)
+
+    private fun Table.enhanceNumberColumn() = Table(
+        headers = ArrayList<String>().apply {
+            this += "No."
+            this += headers
+        },
+        rowData = ArrayList<List<String>>().apply {
+            this += rowData.mapIndexed { index, list ->
+                ArrayList<String>().apply {
+                    this += "${index + 1}."
+                    this += list
+                }
+            }
+        }
+    )
 
     private fun Table.formatTable(pageRequest: PageRequest) =
         headers.mapIndexed { index, header ->
@@ -32,5 +47,4 @@ object Formatter {
 
     private fun <E> List<E>.paginated(pageRequest: PageRequest) =
         subList(pageRequest.skip, Math.min(pageRequest.skip + pageRequest.take, size))
-
 }
