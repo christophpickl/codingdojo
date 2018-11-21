@@ -6,7 +6,7 @@ import com.github.christophpickl.codingdojo.csvviewer.logic.Formatter
 import com.github.christophpickl.codingdojo.csvviewer.logic.Paginator
 import com.github.christophpickl.codingdojo.csvviewer.logic.Table
 
-class CsvViewer(
+class Engine(
     private val userPrompter: UserPrompter = UserPrompter(),
     private val table: Table,
     pageSize: Int

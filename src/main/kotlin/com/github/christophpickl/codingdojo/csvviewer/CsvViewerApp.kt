@@ -2,7 +2,7 @@ package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.csvviewer.cli.Args
 import com.github.christophpickl.codingdojo.csvviewer.cli.ArgsParser
-import com.github.christophpickl.codingdojo.csvviewer.cli.CsvViewer
+import com.github.christophpickl.codingdojo.csvviewer.cli.Engine
 import com.github.christophpickl.codingdojo.csvviewer.cli.SystemInputOutput
 import com.github.christophpickl.codingdojo.csvviewer.logic.Reader
 
@@ -29,8 +29,8 @@ object CsvViewerApp {
 
     private fun start(args: Args.RightArgs) {
         val table = Reader.read(io.readFile("$classpathDirectory/${args.csvFile}"))
-        val viewer = CsvViewer(table = table, pageSize = args.pageSize)
-        viewer.startCommandLoop()
+        val engine = Engine(table = table, pageSize = args.pageSize)
+        engine.startCommandLoop()
     }
 
 }
