@@ -12,7 +12,14 @@ class CsvViewerAppIntegrationTest {
         val printed = IoUtil.readFrom {
             CsvViewerApp.main(emptyArray())
         }
-        assertThat(printed, equalTo("Must define filename as application argument!\n"))
+        assertThat(printed, equalTo("${CsvViewerApp.invalidArgsMessage}\n"))
+    }
+
+    fun `When passing three cli args Then print error message`() {
+        val printed = IoUtil.readFrom {
+            CsvViewerApp.main(arrayOf("1", "2", "3"))
+        }
+        assertThat(printed, equalTo("${CsvViewerApp.invalidArgsMessage}\n"))
     }
 
     @Test(
@@ -37,6 +44,18 @@ class CsvViewerAppIntegrationTest {
             Yuri     |23 |Moscow   
             Stephanie|47 |Stockholm
             Nadia    |29 |Madrid   ${"\n"}
+        """.trimIndent()))
+    }
+
+    fun `When passing test persons CSV and page size Then print proper CSV table`() {
+        val printed = IoUtil.readFrom {
+            CsvViewerApp.main(arrayOf("test_persons.csv", "2"))
+        }
+        assertThat(printed, equalTo("""
+            Name     |Age|City
+            ---------+---+---------
+            Peter    |42 |NewYork
+            Paul     |57 |London   ${"\n"}
         """.trimIndent()))
     }
 
