@@ -1,4 +1,4 @@
-package com.github.christophpickl.codingdojo.csvviewer
+package com.github.christophpickl.codingdojo.csvviewer.logic
 
 object Formatter {
 

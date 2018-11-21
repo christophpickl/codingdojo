@@ -1,4 +1,4 @@
-package com.github.christophpickl.codingdojo.csvviewer
+package com.github.christophpickl.codingdojo.csvviewer.cli
 
 object ArgsParser {
 
@@ -11,7 +11,8 @@ object ArgsParser {
         return Args.RightArgs(
             csvFile = cliArgs[0],
             pageSize = if (cliArgs.size >= 2)
-                cliArgs[1].toIntOrNull() ?: return Args.WrongArgs(cliArgs, "Page size must be a valid number!")
+                cliArgs[1].toIntOrNull()
+                    ?: return Args.WrongArgs(cliArgs, "Page size must be a valid number!")
             else defaultPageSize
         )
     }

@@ -1,6 +1,7 @@
-package com.github.christophpickl.codingdojo.csvviewer
+package com.github.christophpickl.codingdojo.csvviewer.cli
 
 import com.github.christophpickl.codingdojo.IoUtil
+import com.github.christophpickl.codingdojo.csvviewer.logic.Table
 import com.natpryce.hamkrest.allOf
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring

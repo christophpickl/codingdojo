@@ -1,5 +1,6 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
+import com.github.christophpickl.codingdojo.csvviewer.cli.InputOutput
 import com.github.christophpickl.codingdojo.plusAssign
 import com.github.christophpickl.codingdojo.removeFirst
 

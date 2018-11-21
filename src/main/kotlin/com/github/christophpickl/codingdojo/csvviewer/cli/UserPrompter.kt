@@ -1,7 +1,7 @@
-package com.github.christophpickl.codingdojo.csvviewer
+package com.github.christophpickl.codingdojo.csvviewer.cli
 
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.PageChoice
+import com.github.christophpickl.codingdojo.csvviewer.cli.UserChoice.MenuChoice
+import com.github.christophpickl.codingdojo.csvviewer.cli.UserChoice.PageChoice
 import com.github.christophpickl.codingdojo.doUntilNotNull
 
 class UserPrompter(

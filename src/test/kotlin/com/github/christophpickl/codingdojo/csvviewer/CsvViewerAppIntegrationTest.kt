@@ -1,7 +1,7 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
 import com.github.christophpickl.codingdojo.IoUtil
-import com.github.christophpickl.codingdojo.csvviewer.UserChoice.MenuChoice
+import com.github.christophpickl.codingdojo.csvviewer.cli.UserChoice.MenuChoice
 import com.natpryce.hamkrest.allOf
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.containsSubstring

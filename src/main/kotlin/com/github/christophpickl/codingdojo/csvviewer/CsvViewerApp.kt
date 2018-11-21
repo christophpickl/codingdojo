@@ -1,7 +1,14 @@
 package com.github.christophpickl.codingdojo.csvviewer
 
+import com.github.christophpickl.codingdojo.csvviewer.cli.Args
+import com.github.christophpickl.codingdojo.csvviewer.cli.ArgsParser
+import com.github.christophpickl.codingdojo.csvviewer.cli.CsvViewer
+import com.github.christophpickl.codingdojo.csvviewer.cli.SystemInputOutput
+import com.github.christophpickl.codingdojo.csvviewer.logic.Reader
+
 object CsvViewerApp {
 
+    private const val classpathDirectory = "/csvviewer"
     private val io = SystemInputOutput
 
     @JvmStatic
@@ -9,7 +16,7 @@ object CsvViewerApp {
         when (val args = ArgsParser.parse(cliArgs)) {
             is Args.RightArgs -> {
                 try {
-                    CsvViewerStarter(io = io).start(args)
+                    start(args)
                 } catch (e: Exception) {
                     io.println("[EXCEPTION] ${e.message ?: "N/A"}")
                 }
@@ -19,14 +26,9 @@ object CsvViewerApp {
             }
         }
     }
-}
 
-class CsvViewerStarter(
-    private val io: InputOutput = SystemInputOutput
-) {
-
-    fun start(args: Args.RightArgs) {
-        val table = Reader.read(io.readFile("/csvviewer/${args.csvFile}"))
+    private fun start(args: Args.RightArgs) {
+        val table = Reader.read(io.readFile("$classpathDirectory/${args.csvFile}"))
         val viewer = CsvViewer(table = table, pageSize = args.pageSize)
         viewer.startCommandLoop()
     }
