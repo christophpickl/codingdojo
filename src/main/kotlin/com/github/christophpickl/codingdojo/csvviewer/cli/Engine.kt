@@ -2,24 +2,37 @@ package com.github.christophpickl.codingdojo.csvviewer.cli
 
 import com.github.christophpickl.codingdojo.csvviewer.cli.UserChoice.MenuChoice.*
 import com.github.christophpickl.codingdojo.csvviewer.cli.UserChoice.PageChoice
-import com.github.christophpickl.codingdojo.csvviewer.logic.Formatter
 import com.github.christophpickl.codingdojo.csvviewer.logic.Paginator
 import com.github.christophpickl.codingdojo.csvviewer.logic.Table
+import com.github.christophpickl.codingdojo.csvviewer.logic.format
 
 class Engine(
     private val userPrompter: UserPrompter = UserPrompter(),
     private val table: Table,
-    pageSize: Int
+    private val paginator: Paginator
 ) {
 
-    private val paginator = Paginator(pageSize, table.rows)
+    companion object {
+        fun build(
+            userPrompter: UserPrompter = UserPrompter(),
+            table: Table,
+            pageSize: Int
+        ) = Engine(
+            userPrompter = userPrompter,
+            table = table,
+            paginator = Paginator(
+                pageSize = pageSize,
+                totalRows = table.rows
+            )
+        )
+    }
 
     fun startCommandLoop() {
         renderNext()
     }
 
     private fun renderNext() {
-        println(Formatter.format(table, paginator.currentPageRequest))
+        println(table.format(paginator.currentPageRequest))
         println(paginator.pageDisplay)
 
         when (val choice = userPrompter.readNext()) {

@@ -29,7 +29,7 @@ object CsvViewerApp {
 
     private fun start(args: Args.RightArgs) {
         val table = Reader.read(io.readFile("$classpathDirectory/${args.csvFile}"))
-        val engine = Engine(table = table, pageSize = args.pageSize)
+        val engine = Engine.build(table = table, pageSize = args.pageSize)
         engine.startCommandLoop()
     }
 

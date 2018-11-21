@@ -1,5 +1,8 @@
 package com.github.christophpickl.codingdojo.csvviewer.logic
 
+fun Table.format(pageRequest: PageRequest = PageRequest.all) =
+    Formatter.format(this, pageRequest)
+
 object Formatter {
 
     private const val headerSeparator = "+"
