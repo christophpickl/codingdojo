@@ -7,7 +7,14 @@ import org.testng.annotations.Test
 @Test
 class FormatterTest {
 
-    private val twoRowedAndtwoColumnedTable = Table(
+    private val twoRowedAndOneColumnedTable = Table(
+        headers = listOf("H"),
+        rowData = listOf(
+            listOf("a"),
+            listOf("b")
+        )
+    )
+    private val twoRowedAndTwoColumnedTable = Table(
         headers = listOf("H1", "H2"),
         rowData = listOf(
             listOf("a1", "a2"),
@@ -16,7 +23,7 @@ class FormatterTest {
     )
 
     fun `When format table without whitespaces Then return proper string`() {
-        assertThat(Formatter.format(twoRowedAndtwoColumnedTable), equalTo("""
+        assertThat(Formatter.format(twoRowedAndTwoColumnedTable), equalTo("""
             H1|H2
             --+--
             a1|a2
@@ -55,19 +62,19 @@ class FormatterTest {
     }
 
     fun `When format table with 2 rows but page of skip 0 and take 1 Then return first row`() {
-        assertThat(Formatter.format(twoRowedAndtwoColumnedTable, PageRequest(skip = 0, take = 1)), equalTo("""
-            H1|H2
-            --+--
-            a1|a2
+        assertThat(Formatter.format(twoRowedAndOneColumnedTable, PageRequest(skip = 0, take = 1)), equalTo("""
+            H
+            -
+            a
         """.trimIndent()))
     }
 
     fun `When format table with 2 rows but page of skip 1 and take 1 Then return first row`() {
-        assertThat(Formatter.format(twoRowedAndtwoColumnedTable, PageRequest(skip = 1, take = 1)), equalTo("""
-            H1|H2
-            --+--
-            b1|b2
+        assertThat(Formatter.format(twoRowedAndOneColumnedTable, PageRequest(skip = 1, take = 1)), equalTo("""
+            H
+            -
+            b
         """.trimIndent()))
     }
-    
+
 }
