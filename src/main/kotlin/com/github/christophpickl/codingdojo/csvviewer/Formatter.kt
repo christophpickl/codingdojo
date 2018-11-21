@@ -8,16 +8,16 @@ object Formatter {
     private val newLine = "\n"
 
     fun format(csv: Table, pageRequest: PageRequest = PageRequest.all): String =
-        csv.formatTable()
+        csv.formatTable(pageRequest)
 
-    private fun Table.formatTable() =
+    private fun Table.formatTable(pageRequest: PageRequest) =
         headers.mapIndexed { index, header ->
             header.ensureLength(columnMaxLengths[index])
         }.joinToString(entrySeparator) + newLine +
             headers.mapIndexed { index, _ ->
                 underline.times(columnMaxLengths[index])
             }.joinToString(headerSeparator) + newLine +
-            rowData.mapIndexed { _, row ->
+            rowData.paginated(pageRequest).mapIndexed { _, row ->
                 row.mapIndexed { index, rowEntry ->
                     rowEntry.ensureLength(columnMaxLengths[index])
                 }.joinToString(entrySeparator)
@@ -29,5 +29,8 @@ object Formatter {
 
     private fun String.times(desiredLength: Int) =
         (1..desiredLength).fold("") { acc, _ -> "$acc$this" }
+
+    private fun <E> List<E>.paginated(pageRequest: PageRequest) =
+        subList(pageRequest.skip, Math.min(pageRequest.skip + pageRequest.take, size))
 
 }
