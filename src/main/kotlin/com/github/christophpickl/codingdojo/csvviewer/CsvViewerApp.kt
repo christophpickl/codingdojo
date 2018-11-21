@@ -5,6 +5,7 @@ import java.io.File
 object CsvViewerApp {
 
     const val invalidArgsMessage = "Must define filename as application argument!"
+    private const val defaultPageSize = 10
 
     @JvmStatic
     fun main(args: Array<String>) {
@@ -12,7 +13,11 @@ object CsvViewerApp {
             println(invalidArgsMessage)
             return
         }
-        val pageSize = if (args.size >= 2) args[1].toInt() else CsvViewer.DEFAULT_PAGE_SIZE
+        val pageSize = if (args.size >= 2) args[1].toInt() else defaultPageSize
+        if (pageSize <= 0) {
+            println("Page size must be a positive, non-null number! (was: $pageSize)")
+            return
+        }
         val table = Reader.read(readLinesOf(args[0]))
         val viewer = CsvViewer(table, pageSize)
         viewer.view()

@@ -19,12 +19,15 @@ data class Table(
         }
     }
 
+    val cols = headers.size
+    val rows = rowData.size
+
     private val allLines = ArrayList<List<String>>().apply {
         this += headers
         this += rowData
     }
 
-    val columnMaxLengths: List<Int> = (0 until headers.size).map { colNumber ->
+    val columnMaxLengths: List<Int> = (0 until cols).map { colNumber ->
         allLines.map { it[colNumber].length }.max() ?: 0
     }
 
