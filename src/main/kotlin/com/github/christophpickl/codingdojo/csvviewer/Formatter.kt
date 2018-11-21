@@ -7,7 +7,7 @@ object Formatter {
     private val underline = "-"
     private val newLine = "\n"
 
-    fun format(csv: Table): String =
+    fun format(csv: Table, pageRequest: PageRequest = PageRequest.all): String =
         csv.formatTable()
 
     private fun Table.formatTable() =
